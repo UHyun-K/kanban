@@ -1,8 +1,8 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { RecoilRoot } from "recoil";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { darkTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -34,9 +34,7 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
-body {
-  line-height: 1;
-}
+
 menu, ol, ul , li{
   list-style: none;
 }
@@ -58,21 +56,14 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:white;
+  background-color:${(props) => props.theme.bgColor};
   color:black;
   line-height: 1.2;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
 }
 a {
   text-decoration:none;
   color:inherit;
 }
-
-button{
-background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer} 
 `;
 
 const root = ReactDOM.createRoot(
@@ -80,10 +71,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <React.StrictMode>
+    <ThemeProvider theme={darkTheme}>
         <RecoilRoot>
             <GlobalStyle />
             <App />
         </RecoilRoot>
-    </React.StrictMode>
+    </ThemeProvider>
 );
