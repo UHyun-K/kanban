@@ -4,17 +4,19 @@ import DraggableCard from "./DraggableCard";
 
 const Wrapper = styled.div`
     width: 300px;
-    padding: 20px 10px;
     padding-top: 10px;
     background-color: ${(props) => props.theme.boardColor};
     border-radius: 5px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 `;
 const Title = styled.h1`
-    font-weight: bold;
-    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 18px;
 `;
 interface IAreaProps {
     isDraggingOver: boolean;
@@ -23,12 +25,13 @@ interface IAreaProps {
 const Area = styled.div<IAreaProps>`
     background-color: ${(prop) =>
         prop.isDraggingOver
-            ? "pink"
+            ? "#dfe6e9"
             : prop.isDraggingFromThis
-            ? "red"
-            : "blue"};
+            ? "#b2bec3"
+            : "transparent"};
     flex-grow: 1;
     transition: background-color 0.3s ease-in-out;
+    padding: 20px;
 `;
 
 interface IBoardProps {
