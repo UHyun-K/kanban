@@ -1,13 +1,8 @@
-import {
-    DragDropContext,
-    Droppable,
-    Draggable,
-    DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
-import DraggableCard from "./Components/DraggableCard";
+
 import Board from "./Components/Board";
 
 const Wrapper = styled.div`
@@ -33,6 +28,19 @@ function App() {
         const { draggableId, destination, source } = info;
         if (!destination) return;
 
+        if (destination?.droppableId === source.droppableId) {
+            // same board movement.
+            setToDos((allBoards) => {
+                const boardCopy = [...allBoards[source.droppableId]];
+                const taskObj = boardCopy[source.index];
+                boardCopy.splice(source.index, 1);
+                boardCopy.splice(destination?.index, 0, taskObj);
+                return {
+                    ...allBoards,
+                    [source.droppableId]: boardCopy,
+                };
+            });
+        }
         if (destination?.droppableId !== source.droppableId) {
             // cross board movement
             setToDos((allBoards) => {
