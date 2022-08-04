@@ -1,7 +1,7 @@
 import React from "react";
 import { VscEdit, VscClose } from "react-icons/vsc";
 import { Draggable } from "react-beautiful-dnd";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "../atoms";
 
@@ -61,6 +61,8 @@ function DraggableCard({
             };
         });
     };
+
+    const onEdit = (event: React.MouseEvent<SVGElement>) => {};
     return (
         <Draggable draggableId={toDoId + ""} index={index}>
             {(magic, snapshot) => (
@@ -72,7 +74,7 @@ function DraggableCard({
                 >
                     <Text>{toDoText}</Text>
                     <IconWrap>
-                        <VscEdit />
+                        <VscEdit onClick={onEdit} />
                         <VscClose onClick={onDelete} />
                     </IconWrap>
                 </Card>

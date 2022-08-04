@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { toDoState } from "./atoms";
 
 import Board from "./Components/Board";
+import NewBoard from "./Components/NewBoard";
 
 const Wrapper = styled.div`
     display: flex;
@@ -61,19 +62,22 @@ function App() {
         }
     };
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Wrapper>
-                <Boards>
-                    {Object.keys(toDos).map((boardId) => (
-                        <Board
-                            boardId={boardId}
-                            key={boardId}
-                            toDos={toDos[boardId]}
-                        />
-                    ))}
-                </Boards>
-            </Wrapper>
-        </DragDropContext>
+        <>
+            <NewBoard />
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Wrapper>
+                    <Boards>
+                        {Object.keys(toDos).map((boardId) => (
+                            <Board
+                                boardId={boardId}
+                                key={boardId}
+                                toDos={toDos[boardId]}
+                            />
+                        ))}
+                    </Boards>
+                </Wrapper>
+            </DragDropContext>
+        </>
     );
 }
 
