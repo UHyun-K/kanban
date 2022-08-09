@@ -4,7 +4,11 @@ import styled from "styled-components";
 import DraggableCard from "./DraggableCard";
 import { ITodo, toDoState } from "../atoms";
 import { useSetRecoilState } from "recoil";
+import { VscClose } from "react-icons/vsc";
 
+const style = {
+    color: "red",
+};
 const Wrapper = styled.div`
     width: 300px;
     padding-top: 10px;
@@ -14,6 +18,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    div {
+        display: flex;
+    }
 `;
 const Title = styled.h1`
     text-align: center;
@@ -69,10 +76,21 @@ function Board({ toDos, boardId }: IBoardProps) {
         });
         setValue("toDo", "");
     };
-
+    const onClick = (event: React.MouseEvent<SVGElement>) => {
+        setToDos((allBoards) => {
+            const BoardCopy = { ...allBoards };
+            console.log(BoardCopy);
+            delete BoardCopy[boardId];
+            return BoardCopy;
+        });
+    };
     return (
         <Wrapper>
-            <Title>{boardId}</Title>
+            <div>
+                <Title>{boardId}</Title>
+                <VscClose style={style} onClick={onClick} />
+            </div>
+
             <Form onSubmit={handleSubmit(onValid)}>
                 <input
                     {...register("toDo", { required: true })}
