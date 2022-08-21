@@ -27,6 +27,7 @@ function NewBoard() {
                 [newBoardName]: [],
             };
         });
+        setValue("newBoardName", "");
     };
     return (
         <Wrapper>

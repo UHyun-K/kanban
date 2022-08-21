@@ -62,7 +62,6 @@ function DraggableCard({
         });
     };
 
-    const onEdit = (event: React.MouseEvent<SVGElement>) => {};
     return (
         <Draggable draggableId={toDoId + ""} index={index}>
             {(magic, snapshot) => (
@@ -73,8 +72,8 @@ function DraggableCard({
                     {...magic.dragHandleProps}
                 >
                     <Text>{toDoText}</Text>
+       
                     <IconWrap>
-                        <VscEdit onClick={onEdit} />
                         <VscClose onClick={onDelete} />
                     </IconWrap>
                 </Card>

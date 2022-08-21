@@ -1,32 +1,47 @@
 import { useForm } from "react-hook-form";
-import { Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import DraggableCard from "./DraggableCard";
 import { ITodo, toDoState } from "../atoms";
-import { useSetRecoilState } from "recoil";
-import { VscClose } from "react-icons/vsc";
+import { useRecoilState } from "recoil";
+import { VscClose, VscEdit } from "react-icons/vsc";
+import BoardTitleEdit from "./BoardTitleEdit";
 
 const style = {
     color: "red",
 };
+const Icons = styled.div`
+    opacity: 0;
+    display: flex;
+    transition: opacity ease-in 0.1s;
+`;
 const Wrapper = styled.div`
     width: 300px;
-    padding-top: 10px;
+    padding: 10px 10px;
     background-color: ${(props) => props.theme.boardColor};
     border-radius: 5px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
     div {
         display: flex;
     }
+    &:hover {
+        ${Icons} {
+            opacity: 1;
+        }
+    }
 `;
+
 const Title = styled.h1`
     text-align: center;
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 18px;
+    display: flex;
+    flex-grow: 3;
 `;
 interface IAreaProps {
     isDraggingOver: boolean;
@@ -46,22 +61,32 @@ const Area = styled.div<IAreaProps>`
 
 const Form = styled.form`
     width: 100%;
-
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
     input {
-        width: 100%;
+        font-size: 16px;
+        border: 0;
+        background-color: white;
+        width: 80%;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin: 0 auto;
     }
 `;
 
 interface IBoardProps {
     toDos: ITodo[];
     boardId: string;
+    index: number;
 }
 interface IForm {
     toDo: string;
 }
 
-function Board({ toDos, boardId }: IBoardProps) {
-    const setToDos = useSetRecoilState(toDoState);
+function Board({ toDos, boardId, index }: IBoardProps) {
+    const [toDoList, setToDos] = useRecoilState(toDoState);
     const { register, setValue, handleSubmit } = useForm<IForm>();
     const onValid = ({ toDo }: IForm) => {
         const newToDo = {
@@ -76,52 +101,62 @@ function Board({ toDos, boardId }: IBoardProps) {
         });
         setValue("toDo", "");
     };
-    const onClick = (event: React.MouseEvent<SVGElement>) => {
+    const onDelete = (event: React.MouseEvent<SVGElement>) => {
         setToDos((allBoards) => {
-            const BoardCopy = { ...allBoards };
-            console.log(BoardCopy);
-            delete BoardCopy[boardId];
-            return BoardCopy;
+            const boardCopy = { ...allBoards };
+            delete boardCopy[boardId];
+            return boardCopy;
         });
     };
-    return (
-        <Wrapper>
-            <div>
-                <Title>{boardId}</Title>
-                <VscClose style={style} onClick={onClick} />
-            </div>
 
-            <Form onSubmit={handleSubmit(onValid)}>
-                <input
-                    {...register("toDo", { required: true })}
-                    type="text"
-                    placeholder={`Add task to doing`}
-                />
-            </Form>
-            <Droppable droppableId={boardId}>
-                {(magic, snapshot) => (
-                    <Area
-                        isDraggingOver={snapshot.isDraggingOver}
-                        isDraggingFromThis={Boolean(
-                            snapshot.draggingFromThisWith
+    const onEdit = (event: React.MouseEvent<SVGElement>) => {};
+    return (
+        <Draggable index={index} draggableId={boardId}>
+            {(magic) => (
+                <Wrapper ref={magic.innerRef} {...magic.draggableProps}>
+                    <div {...magic.dragHandleProps}>
+                        <Title>{boardId}</Title>
+                        <BoardTitleEdit />
+                        <Icons>
+                            <VscClose style={style} onClick={onDelete} />
+                            <VscEdit onClick={onEdit} />
+                        </Icons>
+                    </div>
+
+                    <Form onSubmit={handleSubmit(onValid)}>
+                        <input
+                            {...register("toDo", { required: true })}
+                            type="text"
+                            placeholder={`Add task to doing`}
+                        />
+                    </Form>
+
+                    <Droppable droppableId={boardId}>
+                        {(magic, snapshot) => (
+                            <Area
+                                isDraggingOver={snapshot.isDraggingOver}
+                                isDraggingFromThis={Boolean(
+                                    snapshot.draggingFromThisWith
+                                )}
+                                ref={magic.innerRef}
+                                {...magic.droppableProps}
+                            >
+                                {toDos.map((toDo, index) => (
+                                    <DraggableCard
+                                        key={toDo.id}
+                                        index={index}
+                                        toDoId={toDo.id}
+                                        toDoText={toDo.text}
+                                        boardId={boardId}
+                                    />
+                                ))}
+                                {magic.placeholder}
+                            </Area>
                         )}
-                        ref={magic.innerRef}
-                        {...magic.droppableProps}
-                    >
-                        {toDos.map((toDo, index) => (
-                            <DraggableCard
-                                key={toDo.id}
-                                index={index}
-                                toDoId={toDo.id}
-                                toDoText={toDo.text}
-                                boardId={boardId}
-                            />
-                        ))}
-                        {magic.placeholder}
-                    </Area>
-                )}
-            </Droppable>
-        </Wrapper>
+                    </Droppable>
+                </Wrapper>
+            )}
+        </Draggable>
     );
 }
 
