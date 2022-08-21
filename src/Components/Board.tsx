@@ -131,7 +131,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                         />
                     </Form>
 
-                    <Droppable droppableId={boardId}>
+                    <Droppable droppableId={boardId} direction="vertical">
                         {(magic, snapshot) => (
                             <Area
                                 isDraggingOver={snapshot.isDraggingOver}

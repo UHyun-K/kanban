@@ -29,6 +29,18 @@ function App() {
         const { draggableId, destination, source } = info;
         if (!destination) return;
 
+        if (info.type === "board") {
+            // board movement
+            setToDos((allBoard) => {
+                const copiedBoard = Object.entries({ ...allBoard });
+                const cutTodo = [...copiedBoard.splice(source.index, 1)];
+                copiedBoard.splice(destination.index, 0, ...cutTodo);
+                return {
+                    ...Object.fromEntries(copiedBoard),
+                };
+            });
+        }
+
         if (destination?.droppableId === source.droppableId) {
             // same board movement.
             setToDos((allBoards) => {
@@ -68,7 +80,7 @@ function App() {
             <DragDropContext onDragEnd={onDragEnd}>
                 <Wrapper>
                     <Droppable
-                        droppableId="BoardMovement"
+                        droppableId="BoardMovment"
                         direction="horizontal"
                         type="board"
                     >
