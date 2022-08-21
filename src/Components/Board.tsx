@@ -111,7 +111,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
 
     const onEdit = (event: React.MouseEvent<SVGElement>) => {};
     return (
-        <Draggable index={index} draggableId={boardId}>
+        <Draggable index={index} key={boardId} draggableId={boardId}>
             {(magic) => (
                 <Wrapper ref={magic.innerRef} {...magic.draggableProps}>
                     <div {...magic.dragHandleProps}>
