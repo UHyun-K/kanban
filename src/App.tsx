@@ -33,6 +33,8 @@ function App() {
             // board movement
             setToDos((allBoard) => {
                 const copiedBoard = Object.entries({ ...allBoard });
+                console.log(copiedBoard);
+
                 const cutTodo = [...copiedBoard.splice(source.index, 1)];
                 copiedBoard.splice(destination.index, 0, ...cutTodo);
                 return {

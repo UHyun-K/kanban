@@ -19,23 +19,3 @@ export const toDoState = atom<IToDoState>({
     },
     effects_UNSTABLE: [persistAtom],
 });
-
-/* export const editState = atom<string>({
-    key: "edit",
-    default: '',
-});
- */
-/* export const boardNameEditSelector = selector<IToDoState>({
-    key:"boardNameEdit",
-    get: ({get}) => {
-        const Boards = get(toDoState);
-        return Boards;
-    },
-    set:({set},newValue)=>{
-        const newName = newValue;
-        set((toDoState)=>
-            ...toDoState,
-
-        )
-    }
-}); */

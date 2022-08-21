@@ -5,8 +5,6 @@ import DraggableCard from "./DraggableCard";
 import { ITodo, toDoState } from "../atoms";
 import { useRecoilState } from "recoil";
 import { VscClose, VscEdit } from "react-icons/vsc";
-import BoardTitleEdit from "./BoardTitleEdit";
-
 const style = {
     color: "red",
 };
@@ -109,7 +107,6 @@ function Board({ toDos, boardId, index }: IBoardProps) {
         });
     };
 
-    const onEdit = (event: React.MouseEvent<SVGElement>) => {};
     return (
         <Draggable index={index} key={boardId} draggableId={boardId}>
             {(magic) => (
@@ -119,7 +116,6 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                         <BoardTitleEdit />
                         <Icons>
                             <VscClose style={style} onClick={onDelete} />
-                            <VscEdit onClick={onEdit} />
                         </Icons>
                     </div>
 
