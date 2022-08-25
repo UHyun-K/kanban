@@ -1,5 +1,5 @@
 import React from "react";
-import { VscEdit, VscClose } from "react-icons/vsc";
+import { VscClose } from "react-icons/vsc";
 import { Draggable } from "react-beautiful-dnd";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -22,8 +22,7 @@ const Card = styled.div<{ isDragging: boolean }>`
     box-shadow: ${(props) =>
         props.isDragging ? "0px 2px 5px rgba(0,0,0,0.05) " : "none"};
 
-    background: blue;
-    display: flex;
+    background: white;
     flex-grow: 1;
     &:hover {
         ${IconWrap} {
@@ -72,7 +71,6 @@ function DraggableCard({
                     {...magic.dragHandleProps}
                 >
                     <Text>{toDoText}</Text>
-       
                     <IconWrap>
                         <VscClose onClick={onDelete} />
                     </IconWrap>

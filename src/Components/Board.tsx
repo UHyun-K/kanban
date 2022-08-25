@@ -4,7 +4,7 @@ import styled from "styled-components";
 import DraggableCard from "./DraggableCard";
 import { ITodo, toDoState } from "../atoms";
 import { useRecoilState } from "recoil";
-import { VscClose, VscEdit } from "react-icons/vsc";
+import { VscClose, VscSymbolColor } from "react-icons/vsc";
 const style = {
     color: "red",
 };
@@ -22,7 +22,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
     div {
         display: flex;
     }
@@ -53,6 +52,7 @@ const Area = styled.div<IAreaProps>`
             ? "#b2bec3"
             : "transparent"};
     flex-grow: 1;
+    flex-direction: column;
     transition: background-color 0.3s ease-in-out;
     padding: 20px;
 `;
@@ -113,7 +113,6 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                 <Wrapper ref={magic.innerRef} {...magic.draggableProps}>
                     <div {...magic.dragHandleProps}>
                         <Title>{boardId}</Title>
-                        <BoardTitleEdit />
                         <Icons>
                             <VscClose style={style} onClick={onDelete} />
                         </Icons>
@@ -123,7 +122,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                         <input
                             {...register("toDo", { required: true })}
                             type="text"
-                            placeholder={`Add task to doing`}
+                            placeholder={`내용을 입력해주세요`}
                         />
                     </Form>
 

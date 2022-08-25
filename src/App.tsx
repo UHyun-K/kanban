@@ -2,13 +2,13 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
-
+import { Helmet } from "react-helmet";
 import Board from "./Components/Board";
 import NewBoard from "./Components/NewBoard";
 
 const Wrapper = styled.div`
     display: flex;
-    width: 100vw;
+
     margin: 0 auto;
     justify-content: center;
     align-items: center;
@@ -26,7 +26,7 @@ function App() {
     const [toDos, setToDos] = useRecoilState(toDoState);
     const onDragEnd = (info: DropResult) => {
         console.log(info);
-        const { draggableId, destination, source } = info;
+        const { destination, source } = info;
         if (!destination) return;
 
         if (info.type === "board") {
@@ -78,6 +78,9 @@ function App() {
 
     return (
         <>
+            <Helmet>
+                <title>ChopChop!</title>
+            </Helmet>
             <NewBoard />
             <DragDropContext onDragEnd={onDragEnd}>
                 <Wrapper>
