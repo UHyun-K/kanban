@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/kaban/src/index.tsx/static/js/main.7b2287e4.js",
-    "index.html": "/kaban/src/index.tsx/index.html",
-    "main.7b2287e4.js.map": "/kaban/src/index.tsx/static/js/main.7b2287e4.js.map"
+    "main.js": "/kaban/static/js/main.c963b27d.js",
+    "index.html": "/kaban/index.html",
+    "main.c963b27d.js.map": "/kaban/static/js/main.c963b27d.js.map"
   },
   "entrypoints": [
-    "static/js/main.7b2287e4.js"
+    "static/js/main.c963b27d.js"
   ]
 }
