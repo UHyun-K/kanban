@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./src/App";
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { darkTheme } from "./theme";
+import { darkTheme } from "./src/theme";
 
 const GlobalStyle = createGlobalStyle`@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
