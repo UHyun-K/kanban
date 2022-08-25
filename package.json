@@ -1,6 +1,6 @@
 {
-    "homepage": "https://UHyun-K.github.io/kaban",
-    "name": "kanban",
+    "homepage": "https://UHyun-K.github.io/trello-clone",
+    "name": "trello-clone",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

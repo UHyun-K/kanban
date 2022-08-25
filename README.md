@@ -56,3 +56,5 @@ return {
 ...Object.fromEntries(copiedBoard),
 };
 });
+
+5.git reset으로 삭제한 commit을 복구하기위해 git reflog기능 사용
