@@ -1,6 +1,6 @@
-#React 칸반보드
+# React 칸반보드
 
-##⚙️ 기술 및 개발 환경
+## ⚙️ 기술 및 개발 환경
 
 React
 TypeScript
@@ -9,15 +9,15 @@ Atom
 Recoil
 React-hook-form
 
-##🎐구현 기능
+## 🎐구현 기능
 
--board
++board
 
 Create
 Delete
 Drag
 
--Cards
++Cards
 
 Create
 Delete
@@ -25,7 +25,7 @@ Drag
 
 -local storage
 
-###문제와해결
+### 문제와해결
 
 1.icon 사라지고 없어지는 것 mouseOn eventHandler를 이용하여 씨름했으나
 -->hover
@@ -58,3 +58,6 @@ return {
 });
 
 5.git reset으로 삭제한 commit을 복구하기위해 git reflog기능 사용
+
+6.gh-pages deploy --> readme.md만 출력됨
+https://towardsdev.com/github-pages-does-not-work-for-me-f9d48fd44a5f 참고하였음.
